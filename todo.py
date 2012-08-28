@@ -30,7 +30,7 @@ class FrontPage(QtGui.QWidget):
             Defines how the front page looks like
         """
         self.groupbox = QtGui.QGroupBox("TO-DO-LIST")
-        self.grid = QtGui.QGridModel()
+        self.grid = QtGui.QGridLayout()
         """
             Group box in order to group the displayed tasks in a frame
             GridLayout in order to place the buttons, tasks appropriately
