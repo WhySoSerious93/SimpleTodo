@@ -1,6 +1,5 @@
 
 import sys
-sys.path.insert(0, 'C:\Python27\Lib\site-packages\PyQt4')
 from PyQt4 import QtGui, QtCore
 
 
