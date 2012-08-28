@@ -3,7 +3,7 @@ import sys
 from PyQt4 import QtGui, QtCore
 
 
-class ModelStack (QtGui.QStackedWidget): 
+class ModelStack(QtGui.QStackedWidget): 
     """ 
         Main Window which could be used to switch between
         different pages.
@@ -41,7 +41,7 @@ class FrontPage(QtGui.QWidget):
 
         # Buttons to edit your tasks.
         self.add = QtGui.QPushButton("Add")
-        self.new = QtGui.QPushButton("New")
+        self.new = QtGui.QPushButton("New") # TODO: What is the difference between "Add" and "New"?
         self.cancel = QtGui.QPushButton("Cancel")
 
         # All Elements are add to the Layout and placed at a certain position.
@@ -65,7 +65,7 @@ def main():
     sys.exit(app.exec_())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
 
 
