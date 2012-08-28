@@ -1,10 +1,10 @@
 
 import sys
 from PyQt4 import QtGui, QtCore
+import ServerCommunicator
 
-
-class ModelStack(QtGui.QStackedWidget): 
-    """ 
+class ModelStack(QtGui.QStackedWidget):
+    """
         Main Window which could be used to switch between
         different windows.
     """
@@ -18,7 +18,7 @@ class ModelStack(QtGui.QStackedWidget):
 class MainWindow(QtGui.QWidget):
     """
         The main operating window.
-    """ 
+    """
     def __init__(self, parent):
         super(MainWindow, self).__init__()
         self.FP_Model()
@@ -32,24 +32,29 @@ class MainWindow(QtGui.QWidget):
         # GridLayout in order to place the buttons, tasks appropriately.
         self.grid = QtGui.QGridLayout()
 
-        # Some sample tasks to show the general design concept.
-        self.task1 = QtGui.QCheckBox("Do your homework", self)
-        self.task2 = QtGui.QCheckBox("Play Counter-Strike till Midnight", self)
-        self.task3 = QtGui.QCheckBox("Sleep till next day afternoon", self)
+        # Load tasks and create and add widgets.
+        currentGridRow = 0
+        tasks = ServerCommunicator.loadTasks()
+        for task in tasks:
+            checkbox = QtGui.QCheckBox(task.getTitle(), self)
+
+            # Set checked.
+            if task.isDone():
+                checkbox.setCheckState(QtCore.Qt.Checked)
+            else:
+                checkbox.setCheckState(QtCore.Qt.Unchecked)
+
+            self.grid.addWidget(checkbox, currentGridRow, 1)
+            currentGridRow += 1
 
         # Buttons to edit your tasks.
         self.add = QtGui.QPushButton("Add")
         self.new = QtGui.QPushButton("New") # TODO: What is the difference between "Add" and "New"?
         self.cancel = QtGui.QPushButton("Cancel")
 
-        # All Elements are add to the Layout and placed at a certain position.
-        self.grid.addWidget(self.task1, 0, 1)
-        self.grid.addWidget(self.task2, 1, 1)
-        self.grid.addWidget(self.task3, 2, 1)
-
-        self.grid.addWidget(self.add, 4, 1)
-        self.grid.addWidget(self.new, 4, 2)
-        self.grid.addWidget(self.cancel, 4, 3)
+        self.grid.addWidget(self.add,    currentGridRow + 1, 1)
+        self.grid.addWidget(self.new,    currentGridRow + 1, 2)
+        self.grid.addWidget(self.cancel, currentGridRow + 1, 3)
 
         self.setLayout(self.grid)
         self.move(300, 300)
@@ -65,5 +70,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
