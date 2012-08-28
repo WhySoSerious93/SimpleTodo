@@ -6,28 +6,26 @@ from PyQt4 import QtGui, QtCore
 class ModelStack(QtGui.QStackedWidget): 
     """ 
         Main Window which could be used to switch between
-        different pages.
+        different windows.
     """
     def __init__(self, parent = None):
-
         super(ModelStack, self).__init__(parent)
-        self.frontpage = FrontPage(self)
-        self.addWidget(self.frontpage)
-        self.setCurrentWidget(self.frontpage)
+        self.mainWindow = MainWindow(self)
+        self.addWidget(self.mainWindow)
+        self.setCurrentWidget(self.mainWindow)
 
 
-class FrontPage(QtGui.QWidget):
+class MainWindow(QtGui.QWidget):
     """
-        The main operating page.
+        The main operating window.
     """ 
     def __init__(self, parent):
-
-        super(FrontPage, self).__init__()
+        super(MainWindow, self).__init__()
         self.FP_Model()
 
     def FP_Model(self):
         """
-            Defines how the front page looks like
+            Defines how the main window looks like.
         """
         # Group box in order to group the displayed tasks in a frame
         self.groupbox = QtGui.QGroupBox("TO-DO-LIST")
