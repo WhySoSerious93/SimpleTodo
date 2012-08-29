@@ -2,6 +2,7 @@
 import sys
 from PyQt4 import QtGui, QtCore
 import ServerCommunicator
+import todoEvents
 
 class ModelStack(QtGui.QStackedWidget):
     """
@@ -33,7 +34,7 @@ class MainWindow(QtGui.QWidget):
         self.grid = QtGui.QGridLayout()
 
         # Load tasks and create and add widgets.
-        currentGridRow = 0
+        self.currentGridRow = 0
         tasks = ServerCommunicator.loadTasks()
         for task in tasks:
             checkbox = QtGui.QCheckBox(task.getTitle(), self)
@@ -44,21 +45,29 @@ class MainWindow(QtGui.QWidget):
             else:
                 checkbox.setCheckState(QtCore.Qt.Unchecked)
 
-            self.grid.addWidget(checkbox, currentGridRow, 1)
-            currentGridRow += 1
+            self.grid.addWidget(checkbox, self.currentGridRow, 1)
+            self.currentGridRow += 1
 
         # Buttons to edit your tasks.
         self.edit = QtGui.QPushButton("Edit")
-        self.new = QtGui.QPushButton("New") # TODO: What is the difference between "Add" and "New"?
+        self.new = QtGui.QPushButton("New")
         self.cancel = QtGui.QPushButton("Cancel")
 
-        self.grid.addWidget(self.edit,    currentGridRow + 1, 1)
-        self.grid.addWidget(self.new,    currentGridRow + 1, 2)
-        self.grid.addWidget(self.cancel, currentGridRow + 1, 3)
+        self.new.clicked.connect(self.nEvent)
+
+        self.grid.addWidget(self.edit,    self.currentGridRow + 1, 1)
+        self.grid.addWidget(self.new,    self.currentGridRow + 1, 2)
+        self.grid.addWidget(self.cancel, self.currentGridRow + 1, 3)
 
         self.setLayout(self.grid)
         self.move(300, 300)
         self.show()
+
+    def nEvent(self):
+
+        todoEvents.newEvent(self, self.currentGridRow)
+        self.currentGridRow += 1
+
 
 
 def main():
