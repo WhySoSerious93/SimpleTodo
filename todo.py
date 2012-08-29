@@ -20,7 +20,7 @@ class MainWindow(QtGui.QWidget):
         The main operating window.
     """
     def __init__(self, parent):
-        super(MainWindow, self).__init__()
+        super().__init__()
         self.FP_Model()
 
     def FP_Model(self):
