@@ -4,6 +4,6 @@ from task import TaskModel
 def loadTasks():
     """ Loads all existing tasks from the server. """
     # For now only return a list of example tasks.
-    return [TaskModel("CS:GO hartzen",               True),
-            TaskModel("Benutzerverwaltung bedacht",  False),
-            TaskModel("Geilste Todo App geschaffen", True)]
+    return [TaskModel(1, "CS:GO hartzen",               True),
+            TaskModel(2, "Benutzerverwaltung bedacht",  False),
+            TaskModel(3, "Geilste Todo App geschaffen", True)]
