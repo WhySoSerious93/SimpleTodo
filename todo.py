@@ -21,9 +21,9 @@ class MainWindow(QtGui.QWidget):
     """
     def __init__(self, parent):
         super().__init__()
-        self.Paint()
+        self.paint()
 
-    def Paint(self):
+    def paint(self):
         """
             Defines how the main window looks like.
         """
