@@ -21,9 +21,9 @@ class MainWindow(QtGui.QWidget):
     """
     def __init__(self, parent):
         super().__init__()
-        self.FP_Model()
+        self.Paint()
 
-    def FP_Model(self):
+    def Paint(self):
         """
             Defines how the main window looks like.
         """
@@ -48,7 +48,7 @@ class MainWindow(QtGui.QWidget):
             currentGridRow += 1
 
         # Buttons to edit your tasks.
-        self.add = QtGui.QPushButton("Add")
+        self.add = QtGui.QPushButton("Edit")
         self.new = QtGui.QPushButton("New") # TODO: What is the difference between "Add" and "New"?
         self.cancel = QtGui.QPushButton("Cancel")
 
