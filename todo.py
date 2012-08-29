@@ -48,11 +48,11 @@ class MainWindow(QtGui.QWidget):
             currentGridRow += 1
 
         # Buttons to edit your tasks.
-        self.add = QtGui.QPushButton("Edit")
+        self.edit = QtGui.QPushButton("Edit")
         self.new = QtGui.QPushButton("New") # TODO: What is the difference between "Add" and "New"?
         self.cancel = QtGui.QPushButton("Cancel")
 
-        self.grid.addWidget(self.add,    currentGridRow + 1, 1)
+        self.grid.addWidget(self.edit,    currentGridRow + 1, 1)
         self.grid.addWidget(self.new,    currentGridRow + 1, 2)
         self.grid.addWidget(self.cancel, currentGridRow + 1, 3)
 
