@@ -2,15 +2,14 @@
 import sys
 from PyQt4 import QtGui, QtCore
 import ServerCommunicator
-import todo
+from todo import MainWindow
 
-main = MainWindow()
 
-def newEvent():
-    text, ok = QtGui.QInputDialog.getText(self, 'New Task',
+def newEvent(parent, currentGrid):
+    text, ok = QtGui.QInputDialog.getText(parent, 'New Task',
             'Enter the new Task:')
 
     if ok:
-        newbox = QtGui.QCheckBox(str(text), main)
-        main.grid.addWidget(newbox, main.currentGridRow, 1)
+        newbox = QtGui.QCheckBox(str(text), parent)
+        parent.grid.addWidget(newbox, currentGrid, 1)
 
