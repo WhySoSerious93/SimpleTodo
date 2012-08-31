@@ -15,9 +15,7 @@ def newEvent(parent, currentGrid):
 
 def editEvent(parent, currentGrid, layout):
     for i in range(0, currentGrid):
-        if layout.itemAtPosition(parent, i, 1) ==
-            QtGui.QCheckBox(parent) self:
-
+        if layout.itemAtPosition(parent, i, 1) == QtGui.QCheckBox(parent):
             box = layout.itemAtPosition(parent, i, 1)
 
             if box.isChecked(parent) == True:
