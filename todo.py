@@ -53,7 +53,7 @@ class MainWindow(QtGui.QWidget):
         self.new = QtGui.QPushButton("New")
         self.cancel = QtGui.QPushButton("Cancel")
 
-        self.new.clicked.connect(self.nEvent)
+        self.new.clicked.connect(self.call_newEvent)
 
         self.grid.addWidget(self.edit,    self.currentGridRow + 1, 1)
         self.grid.addWidget(self.new,    self.currentGridRow + 1, 2)
@@ -63,7 +63,7 @@ class MainWindow(QtGui.QWidget):
         self.move(300, 300)
         self.show()
 
-    def nEvent(self):
+    def call_newEvent(self):
 
         todoEvents.newEvent(self, self.currentGridRow)
         self.currentGridRow += 1
