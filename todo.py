@@ -37,25 +37,17 @@ class MainWindow(QtGui.QWidget):
         self.currentGridRow = 0
         tasks = ServerCommunicator.loadTasks()
         for task in tasks:
-            checkbox = QtGui.QCheckBox(task.getTitle(), self)
-
-            # Set checked.
-            if task.isDone():
-                checkbox.setCheckState(QtCore.Qt.Checked)
-            else:
-                checkbox.setCheckState(QtCore.Qt.Unchecked)
-
-            self.grid.addWidget(checkbox, self.currentGridRow, 1)
-            self.currentGridRow += 1
+            self.addTask(task)
 
         # Buttons to edit your tasks.
         self.edit = QtGui.QPushButton("Edit")
         self.new = QtGui.QPushButton("New")
         self.cancel = QtGui.QPushButton("Cancel")
 
-        self.new.clicked.connect(self.call_newEvent)
+        # When new Button clicked, call todoEvents.newEvent where the first argument is this MainWindow.
+        self.new.clicked.connect(todoEvents.newEvent.__get__(self))
 
-        self.grid.addWidget(self.edit,    self.currentGridRow + 1, 1)
+        self.grid.addWidget(self.edit,   self.currentGridRow + 1, 1)
         self.grid.addWidget(self.new,    self.currentGridRow + 1, 2)
         self.grid.addWidget(self.cancel, self.currentGridRow + 1, 3)
 
@@ -63,11 +55,16 @@ class MainWindow(QtGui.QWidget):
         self.move(300, 300)
         self.show()
 
-    def call_newEvent(self):
-
-        todoEvents.newEvent(self, self.currentGridRow)
+    def addTask(self, taskModel):
+        """ Adds a task to the task list. """
         self.currentGridRow += 1
+        checkbox = QtGui.QCheckBox(taskModel.getTitle(), self)
+        if taskModel.isDone():
+            checkbox.setCheckState(QtCore.Qt.Checked)
+        else:
+            checkbox.setCheckState(QtCore.Qt.Unchecked)
 
+        self.grid.addWidget(checkbox, self.currentGridRow, 1)
 
 
 def main():

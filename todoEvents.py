@@ -5,16 +5,14 @@ import ServerCommunicator
 from todo import MainWindow
 
 
-def newEvent(parent, currentGrid):
+def newEvent(parent):
     text, ok = QtGui.QInputDialog.getText(parent, 'New Task',
             'Enter the new Task:')
 
     if ok:
         # Create new TaskModel and add it to the window.
         newTask = ServerCommunicator.createNewTask(text)
-
-        newbox = QtGui.QCheckBox(newTask.getTitle(), parent)
-        parent.grid.addWidget(newbox, currentGrid, 1)
+        parent.addTask(newTask)
 
 def editEvent(parent, currentGrid, layout):
     for i in range(0, currentGrid):
