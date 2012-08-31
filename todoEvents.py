@@ -10,7 +10,10 @@ def newEvent(parent, currentGrid):
             'Enter the new Task:')
 
     if ok:
-        newbox = QtGui.QCheckBox(str(text), parent)
+        # Create new TaskModel and add it to the window.
+        newTask = ServerCommunicator.createNewTask(text)
+
+        newbox = QtGui.QCheckBox(newTask.getTitle(), parent)
         parent.grid.addWidget(newbox, currentGrid, 1)
 
 def editEvent(parent, currentGrid, layout):
