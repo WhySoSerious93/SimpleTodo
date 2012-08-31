@@ -54,6 +54,7 @@ class MainWindow(QtGui.QWidget):
         self.cancel = QtGui.QPushButton("Cancel")
 
         self.new.clicked.connect(self.call_newEvent)
+        self.edit.clicked.connect(self.call_editEvent)
 
         self.grid.addWidget(self.edit,    self.currentGridRow + 1, 1)
         self.grid.addWidget(self.new,    self.currentGridRow + 1, 2)
@@ -67,6 +68,10 @@ class MainWindow(QtGui.QWidget):
 
         todoEvents.newEvent(self, self.currentGridRow)
         self.currentGridRow += 1
+
+    def call_editEvent(self):
+
+        todoEvents.editEvent(self, self.currentGridRow, self.grid)
 
 
 
