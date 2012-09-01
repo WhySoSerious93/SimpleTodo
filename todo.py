@@ -34,11 +34,7 @@ class MainWindow(QtGui.QWidget):
         self.grid = QtGui.QGridLayout()
         # VBoxLayout holding the tasks.
         self.taskVBox = QtGui.QVBoxLayout()
-        self.currentGridRow = 0
         self.currentTaskIndex = 0
-
-        self.grid.addLayout(self.taskVBox, self.currentGridRow, 1)
-        self.currentGridRow += 1
 
         tasks = ServerCommunicator.loadTasks()
         for task in tasks:
@@ -51,12 +47,12 @@ class MainWindow(QtGui.QWidget):
 
         # When new Button clicked, call todoEvents.newEvent where the first argument is this MainWindow.
         self.new.clicked.connect(todoEvents.newEvent.__get__(self))
-
         self.edit.clicked.connect(self.call_editEvent)
 
-        self.grid.addWidget(self.edit,   self.currentGridRow + 1, 1)
-        self.grid.addWidget(self.new,    self.currentGridRow + 1, 2)
-        self.grid.addWidget(self.cancel, self.currentGridRow + 1, 3)
+        self.grid.addLayout(self.taskVBox, 0, 1)
+        self.grid.addWidget(self.edit,     1, 1)
+        self.grid.addWidget(self.new,      1, 2)
+        self.grid.addWidget(self.cancel,   1, 3)
 
         self.setLayout(self.grid)
         self.move(300, 300)
