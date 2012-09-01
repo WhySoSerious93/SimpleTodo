@@ -2,7 +2,7 @@
 import sys
 from PyQt4 import QtGui, QtCore
 import ServerCommunicator
-from todo import MainWindow
+# from todo import MainWindow
 
 
 def newEvent(parent):
@@ -16,14 +16,13 @@ def newEvent(parent):
 
 def editEvent(parent, currentGrid, layout):
     for i in range(0, currentGrid):
-        if layout.itemAtPosition(parent, i, 1) == QtGui.QCheckBox(parent):
-            box = layout.itemAtPosition(parent, i, 1)
+        if layout.itemAtPosition(i, 1) == QtGui.QCheckBox(parent, QtGui.QAbstractButton.text(parent)):
+            box = layout.itemAtPosition(i, 1)
 
             if box.isChecked(parent) == True:
                 text, ok = QtGui.QInputDialog.getText(parent, 'Edit Task',
                 'Edit your current Task:')
 
-            if ok:
-                box.setText(str(text))
-
+                if ok:
+                    box.setText(str(text))
 

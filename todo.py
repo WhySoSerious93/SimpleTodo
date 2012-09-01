@@ -47,6 +47,8 @@ class MainWindow(QtGui.QWidget):
         # When new Button clicked, call todoEvents.newEvent where the first argument is this MainWindow.
         self.new.clicked.connect(todoEvents.newEvent.__get__(self))
 
+        self.edit.clicked.connect(self.call_editEvent)
+
         self.grid.addWidget(self.edit,   self.currentGridRow + 1, 1)
         self.grid.addWidget(self.new,    self.currentGridRow + 1, 2)
         self.grid.addWidget(self.cancel, self.currentGridRow + 1, 3)
@@ -65,6 +67,9 @@ class MainWindow(QtGui.QWidget):
             checkbox.setCheckState(QtCore.Qt.Unchecked)
 
         self.grid.addWidget(checkbox, self.currentGridRow, 1)
+
+    def call_editEvent(self):
+        todoEvents.editEvent(self, self.currentGridRow, self.grid)
 
 
 def main():
