@@ -32,9 +32,14 @@ class MainWindow(QtGui.QWidget):
         self.groupbox = QtGui.QGroupBox("TO-DO-LIST")
         # GridLayout in order to place the buttons, tasks appropriately.
         self.grid = QtGui.QGridLayout()
-
-        # Load tasks and create and add widgets.
+        # VBoxLayout holding the tasks.
+        self.taskVBox = QtGui.QVBoxLayout()
         self.currentGridRow = 0
+        self.currentTaskIndex = 0
+
+        self.grid.addLayout(self.taskVBox, self.currentGridRow, 1)
+        self.currentGridRow += 1
+
         tasks = ServerCommunicator.loadTasks()
         for task in tasks:
             self.addTask(task)
@@ -59,14 +64,14 @@ class MainWindow(QtGui.QWidget):
 
     def addTask(self, taskModel):
         """ Adds a task to the task list. """
-        self.currentGridRow += 1
         checkbox = QtGui.QCheckBox(taskModel.getTitle(), self)
         if taskModel.isDone():
             checkbox.setCheckState(QtCore.Qt.Checked)
         else:
             checkbox.setCheckState(QtCore.Qt.Unchecked)
 
-        self.grid.addWidget(checkbox, self.currentGridRow, 1)
+        self.taskVBox.addWidget(checkbox, self.currentTaskIndex)
+        self.currentTaskIndex += 1
 
     def call_editEvent(self):
         todoEvents.editEvent(self, self.currentGridRow, self.grid)
