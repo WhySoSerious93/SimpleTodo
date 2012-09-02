@@ -28,8 +28,6 @@ class MainWindow(QtGui.QWidget):
         """
             Defines how the main window looks like.
         """
-        # Group box in order to group the displayed tasks in a frame
-        self.groupbox = QtGui.QGroupBox("TO-DO-LIST")
         # GridLayout in order to place the buttons, tasks appropriately.
         self.grid = QtGui.QGridLayout()
         # VBoxLayout holding the tasks.
