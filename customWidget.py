@@ -38,8 +38,6 @@ class TaskWidget(QtGui.QWidget):
 
         self.index -= 1
 
-        print("Removal successful !")
-
     def toEditClicked(self):
 
         text, ok = QtGui.QInputDialog.getText(self, 'New Task',
