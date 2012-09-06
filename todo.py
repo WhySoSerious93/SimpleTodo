@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
-import sys
-from PyQt4 import QtGui, QtCore
+# from PyQt4.QtCore import *
+# from PyQt4.QtGui import *
+from PyQt4 import QtCore, QtGui
+import  sys
 import ServerCommunicator
+from TaskWidget import TaskWidget
 import todoEvents
 
 class ModelStack(QtGui.QStackedWidget):
@@ -28,29 +31,31 @@ class MainWindow(QtGui.QWidget):
         """
             Defines how the main window looks like.
         """
-        # GridLayout in order to place the buttons, tasks appropriately.
+        # Load tasks and create and add widgets.
         self.grid = QtGui.QGridLayout()
-        # VBoxLayout holding the tasks.
         self.taskVBox = QtGui.QVBoxLayout()
         self.currentTaskIndex = 0
 
+        self.currentGridRow = 0
         tasks = ServerCommunicator.loadTasks()
         for task in tasks:
-            self.addTask(task)
+            newTask = TaskWidget(task, self.currentTaskIndex)
+
+            # Set checked.
+            # if task.isDone():
+            #   checkbox.setCheckState(QtCore.Qt.Checked)
+            #else:
+            #    checkbox.setCheckState(QtCore.Qt.Unchecked)
+
+            self.taskVBox.addWidget(newTask, self.currentTaskIndex)
+            self.currentTaskIndex += 1
 
         # Buttons to edit your tasks.
-        self.edit = QtGui.QPushButton("Edit")
         self.new = QtGui.QPushButton("New")
-        self.cancel = QtGui.QPushButton("Cancel")
-
-        # When new Button clicked, call todoEvents.newEvent where the first argument is this MainWindow.
         self.new.clicked.connect(todoEvents.newEvent.__get__(self))
-        self.edit.clicked.connect(self.call_editEvent)
 
         self.grid.addLayout(self.taskVBox, 0, 1)
-        self.grid.addWidget(self.edit,     1, 1)
-        self.grid.addWidget(self.new,      1, 2)
-        self.grid.addWidget(self.cancel,   1, 3)
+        self.grid.addWidget(self.new, 1, 1)
 
         self.setLayout(self.grid)
         self.move(300, 300)
@@ -58,18 +63,14 @@ class MainWindow(QtGui.QWidget):
 
     def addTask(self, taskModel):
         """ Adds a task to the task list. """
-        checkbox = QtGui.QCheckBox(taskModel.getTitle(), self)
-        if taskModel.isDone():
-            checkbox.setCheckState(QtCore.Qt.Checked)
-        else:
-            checkbox.setCheckState(QtCore.Qt.Unchecked)
+        Task = TaskWidget(taskModel, self.currentTaskIndex)
+        #if taskModel.isDone():
+        #    checkbox.setCheckState(QtCore.Qt.Checked)
+        #else:
+        #    checkbox.setCheckState(QtCore.Qt.Unchecked)
 
-        self.taskVBox.addWidget(checkbox, self.currentTaskIndex)
+        self.taskVBox.addWidget(Task, self.currentTaskIndex)
         self.currentTaskIndex += 1
-
-    def call_editEvent(self):
-        todoEvents.editEvent(self, self.currentGridRow, self.grid)
-
 
 def main():
     app = QtGui.QApplication(sys.argv)
