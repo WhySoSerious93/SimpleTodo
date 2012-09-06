@@ -15,15 +15,15 @@ class TaskWidget(QtGui.QWidget):
         self.editButton = QtGui.QPushButton("+")
         self.editButton.setFixedSize(50, 20)
 
-        self.cancelButton = QtGui.QPushButton("X")
-        self.cancelButton.setFixedSize(50, 20)
+        self.deleteButton = QtGui.QPushButton("X")
+        self.deleteButton.setFixedSize(50, 20)
 
         self.editButton.clicked.connect(self.onEditClicked)
-        self.cancelButton.clicked.connect(self.onDeleteClicked)
+        self.deleteButton.clicked.connect(self.onDeleteClicked)
 
         self.hbox.addWidget(self.checkbox)
         self.hbox.addWidget(self.editButton)
-        self.hbox.addWidget(self.cancelButton)
+        self.hbox.addWidget(self.deleteButton)
 
         self.setLayout(self.hbox)
 
@@ -31,7 +31,7 @@ class TaskWidget(QtGui.QWidget):
 
         self.checkbox.setParent(None)
         self.editButton.setParent(None)
-        self.cancelButton.setParent(None)
+        self.deleteButton.setParent(None)
 
         self.index -= 1
 
