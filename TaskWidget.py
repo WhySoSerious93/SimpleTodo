@@ -20,8 +20,8 @@ class TaskWidget(QtGui.QWidget):
         self.cButton = QtGui.QPushButton("X")
         self.cButton.setFixedSize(50, 20)
 
-        self.eButton.clicked.connect(self.toEditClicked)
-        self.cButton.clicked.connect(self.toDeleteClicked)
+        self.eButton.clicked.connect(self.onEditClicked)
+        self.cButton.clicked.connect(self.onDeleteClicked)
 
         self.hbox.addWidget(self.checkbox)
         self.hbox.addWidget(self.eButton)
@@ -29,7 +29,7 @@ class TaskWidget(QtGui.QWidget):
 
         self.setLayout(self.hbox)
 
-    def toDeleteClicked(self):
+    def onDeleteClicked(self):
 
         self.checkbox.setParent(None)
         self.eButton.setParent(None)
@@ -37,7 +37,7 @@ class TaskWidget(QtGui.QWidget):
 
         self.index -= 1
 
-    def toEditClicked(self):
+    def onEditClicked(self):
 
         text, ok = QtGui.QInputDialog.getText(self, 'New Task',
             'Edit the current Task:')
