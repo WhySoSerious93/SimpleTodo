@@ -4,7 +4,7 @@ class TaskWidget(QtGui.QWidget):
     def __init__(self, taskModel, currentIndex):
         self.tModel = taskModel
         self.index = currentIndex
-        super(TaskWidget, self).__init__()
+        super().__init__()
 
         self.hbox = QtGui.QHBoxLayout(self)
 
