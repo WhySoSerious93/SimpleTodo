@@ -12,26 +12,26 @@ class TaskWidget(QtGui.QWidget):
 
     def paint(self):
         self.checkbox = QtGui.QCheckBox(self.tModel.getTitle(), self)
-        self.eButton = QtGui.QPushButton("+")
-        self.eButton.setFixedSize(50, 20)
+        self.editButton = QtGui.QPushButton("+")
+        self.editButton.setFixedSize(50, 20)
 
-        self.cButton = QtGui.QPushButton("X")
-        self.cButton.setFixedSize(50, 20)
+        self.cancelButton = QtGui.QPushButton("X")
+        self.cancelButton.setFixedSize(50, 20)
 
-        self.eButton.clicked.connect(self.onEditClicked)
-        self.cButton.clicked.connect(self.onDeleteClicked)
+        self.editButton.clicked.connect(self.onEditClicked)
+        self.cancelButton.clicked.connect(self.onDeleteClicked)
 
         self.hbox.addWidget(self.checkbox)
-        self.hbox.addWidget(self.eButton)
-        self.hbox.addWidget(self.cButton)
+        self.hbox.addWidget(self.editButton)
+        self.hbox.addWidget(self.cancelButton)
 
         self.setLayout(self.hbox)
 
     def onDeleteClicked(self):
 
         self.checkbox.setParent(None)
-        self.eButton.setParent(None)
-        self.cButton.setParent(None)
+        self.editButton.setParent(None)
+        self.cancelButton.setParent(None)
 
         self.index -= 1
 
@@ -43,5 +43,4 @@ class TaskWidget(QtGui.QWidget):
         if ok:
             self.checkbox.setText(str(text))
             self.tModel.changeTitle(str(text))
-            print ("Changes successful !")
 
