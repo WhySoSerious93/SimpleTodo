@@ -1,9 +1,8 @@
 from PyQt4 import QtGui, QtCore
 
 class TaskWidget(QtGui.QWidget):
-    def __init__(self, taskModel, currentIndex):
+    def __init__(self, taskModel):
         self.tModel = taskModel
-        self.index = currentIndex
         super().__init__()
 
         self.hbox = QtGui.QHBoxLayout(self)
@@ -29,11 +28,7 @@ class TaskWidget(QtGui.QWidget):
         self.setLayout(self.hbox)
 
     def onDeleteClicked(self):
-        self.checkbox.setParent(None)
-        self.editButton.setParent(None)
-        self.deleteButton.setParent(None)
-
-        self.index -= 1
+        self.deleteLater()
 
     def onEditClicked(self):
         text, ok = QtGui.QInputDialog.getText(self, 'New Task',

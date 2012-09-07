@@ -37,7 +37,7 @@ class MainWindow(QtGui.QWidget):
         self.currentGridRow = 0
         tasks = ServerCommunicator.loadTasks()
         for task in tasks:
-            newTask = TaskWidget(task, self.currentTaskIndex)
+            newTask = TaskWidget(task)
 
             # Set checked.
             # if task.isDone():
@@ -61,14 +61,13 @@ class MainWindow(QtGui.QWidget):
 
     def addTask(self, taskModel):
         """ Adds a task to the task list. """
-        Task = TaskWidget(taskModel, self.currentTaskIndex)
+        Task = TaskWidget(taskModel)
         #if taskModel.isDone():
         #    checkbox.setCheckState(QtCore.Qt.Checked)
         #else:
         #    checkbox.setCheckState(QtCore.Qt.Unchecked)
 
-        self.taskVBox.addWidget(Task, self.currentTaskIndex)
-        self.currentTaskIndex += 1
+        self.taskVBox.addWidget(Task)
 
 def main():
     app = QtGui.QApplication(sys.argv)
