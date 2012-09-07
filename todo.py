@@ -43,14 +43,14 @@ class MainWindow(QtGui.QWidget):
         tasks = ServerCommunicator.loadTasks()
         for task in tasks:
             newTask = TaskWidget(task)
-            # Bind taskDeleteClicked to onTaskWidgetDeleteClicked where the additional
-            # argument is the TaskWidget.
+
             newTask.taskDeleteClicked.connect(self.onTaskWidgetDeleteClicked)
 
 
             # Set checked.
-            # if task.isDone():
-            #   checkbox.setCheckState(QtCore.Qt.Checked)
+            if task.isDone():
+               newTask.setTaskChecked()
+               print("Check successful !!")
             #else:
             #    checkbox.setCheckState(QtCore.Qt.Unchecked)
 
@@ -71,8 +71,8 @@ class MainWindow(QtGui.QWidget):
     def addTask(self, taskModel):
         """ Adds a task to the task list. """
         Task = TaskWidget(taskModel)
-        #if taskModel.isDone():
-        #    checkbox.setCheckState(QtCore.Qt.Checked)
+        if taskModel.isDone():
+            Task.setTaskChecked()
         #else:
         #    checkbox.setCheckState(QtCore.Qt.Unchecked)
 
