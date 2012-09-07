@@ -26,8 +26,9 @@ class MainWindow(QtGui.QWidget):
         super().__init__()
         self.paint()
 
-    def onTaskWidgetDeleteClicked(self, taskWidget):
-        self.taskVBox.removeWidget(taskWidget)
+    def onTaskWidgetDeleteClicked(self):
+        sender = self.sender()
+        sender.setParent(None)
 
     def paint(self):
         """
@@ -44,7 +45,7 @@ class MainWindow(QtGui.QWidget):
             newTask = TaskWidget(task)
             # Bind taskDeleteClicked to onTaskWidgetDeleteClicked where the additional
             # argument is the TaskWidget.
-            newTask.taskDeleteClicked.connect(partial(self.onTaskWidgetDeleteClicked, newTask))
+            newTask.taskDeleteClicked.connect(self.onTaskWidgetDeleteClicked)
 
 
             # Set checked.
