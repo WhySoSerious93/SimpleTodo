@@ -1,10 +1,12 @@
 from PyQt4 import QtGui, QtCore
 
 class TaskWidget(QtGui.QWidget):
+    taskDeleteClicked = QtCore.pyqtSignal()
+
     def __init__(self, taskModel):
-        self.tModel = taskModel
         super().__init__()
 
+        self.tModel = taskModel
         self.hbox = QtGui.QHBoxLayout(self)
 
         self.paint()
@@ -28,7 +30,8 @@ class TaskWidget(QtGui.QWidget):
         self.setLayout(self.hbox)
 
     def onDeleteClicked(self):
-        self.deleteLater()
+        # TODO remove task model
+        self.taskDeleteClicked.emit()
 
     def onEditClicked(self):
         text, ok = QtGui.QInputDialog.getText(self, 'New Task',

@@ -3,6 +3,7 @@ from PyQt4 import QtCore, QtGui
 import  sys
 import ServerCommunicator
 from TaskWidget import TaskWidget
+from functools import partial
 import todoEvents
 
 class ModelStack(QtGui.QStackedWidget):
@@ -25,6 +26,9 @@ class MainWindow(QtGui.QWidget):
         super().__init__()
         self.paint()
 
+    def onTaskWidgetDeleteClicked(self, taskWidget):
+        self.taskVBox.removeWidget(taskWidget)
+
     def paint(self):
         """
             Defines how the main window looks like.
@@ -38,6 +42,10 @@ class MainWindow(QtGui.QWidget):
         tasks = ServerCommunicator.loadTasks()
         for task in tasks:
             newTask = TaskWidget(task)
+            # Bind taskDeleteClicked to onTaskWidgetDeleteClicked where the additional
+            # argument is the TaskWidget.
+            newTask.taskDeleteClicked.connect(partial(self.onTaskWidgetDeleteClicked, newTask))
+
 
             # Set checked.
             # if task.isDone():
