@@ -1,7 +1,7 @@
 
 from task import TaskModel
 
-_tasks = [TaskModel(1, "Deus Ex HR hartzen", False),
+_tasks = [TaskModel(1, "Deus Ex HR hartzen", True),
           TaskModel(2, "Erfolgreich investieren", False),
           TaskModel(3, "Geilste Todo App geschaffen", False)]
 

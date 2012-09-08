@@ -13,6 +13,8 @@ class TaskWidget(QtGui.QWidget):
 
     def paint(self):
         self.checkbox = QtGui.QCheckBox(self.tModel.getTitle(), self)
+        if self.tModel.isDone():
+            self.checkbox.setCheckState(QtCore.Qt.Checked)
 
         self.editButton = QtGui.QPushButton("+")
         self.editButton.setFixedSize(50, 20)
