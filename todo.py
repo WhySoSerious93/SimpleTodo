@@ -46,14 +46,6 @@ class MainWindow(QtGui.QWidget):
 
             newTask.taskDeleteClicked.connect(self.onTaskWidgetDeleteClicked)
 
-
-            # Set checked.
-            if task.isDone():
-               newTask.setTaskChecked()
-               print("Check successful !!")
-            #else:
-            #    checkbox.setCheckState(QtCore.Qt.Unchecked)
-
             self.taskVBox.addWidget(newTask, self.currentTaskIndex)
             self.currentTaskIndex += 1
 
