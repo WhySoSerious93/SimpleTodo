@@ -6,14 +6,14 @@ class TaskWidget(QtGui.QWidget):
     def __init__(self, taskModel):
         super().__init__()
 
-        self.tModel = taskModel
+        self.taskModel = taskModel
         self.hbox = QtGui.QHBoxLayout(self)
 
         self.paint()
 
     def paint(self):
-        self.checkbox = QtGui.QCheckBox(self.tModel.getTitle(), self)
-        if self.tModel.isDone():
+        self.checkbox = QtGui.QCheckBox(self.taskModel.getTitle(), self)
+        if self.taskModel.isDone():
             self.checkbox.setCheckState(QtCore.Qt.Checked)
 
         self.editButton = QtGui.QPushButton("+")
@@ -41,5 +41,5 @@ class TaskWidget(QtGui.QWidget):
 
         if ok:
             self.checkbox.setText(str(text))
-            self.tModel.changeTitle(str(text))
+            self.taskModel.changeTitle(str(text))
 

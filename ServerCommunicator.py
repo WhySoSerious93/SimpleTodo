@@ -3,7 +3,7 @@ from task import TaskModel
 
 _tasks = [TaskModel(1, "Deus Ex HR hartzen", True),
           TaskModel(2, "Erfolgreich investieren", False),
-          TaskModel(3, "Geilste Todo App geschaffen", False)]
+          TaskModel(3, "Geilste Todo App geschaffen", True)]
 
 def loadTasks():
     """ Loads all existing tasks from the server. """
