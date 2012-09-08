@@ -41,6 +41,3 @@ class TaskWidget(QtGui.QWidget):
             self.checkbox.setText(str(text))
             self.tModel.changeTitle(str(text))
 
-    def setTaskChecked(self):
-        self.checkbox.setCheckState(QtCore.Qt.Checked)
-

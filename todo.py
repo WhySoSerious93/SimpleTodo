@@ -70,13 +70,8 @@ class MainWindow(QtGui.QWidget):
 
     def addTask(self, taskModel):
         """ Adds a task to the task list. """
-        Task = TaskWidget(taskModel)
-        if taskModel.isDone():
-            Task.setTaskChecked()
-        #else:
-        #    checkbox.setCheckState(QtCore.Qt.Unchecked)
-
-        self.taskVBox.addWidget(Task)
+        task = TaskWidget(taskModel)
+        self.taskVBox.addWidget(task)
 
 def main():
     app = QtGui.QApplication(sys.argv)
