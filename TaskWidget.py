@@ -1,4 +1,5 @@
 from PyQt4 import QtGui, QtCore
+import ServerCommunicator
 
 class TaskWidget(QtGui.QWidget):
     taskDeleteClicked = QtCore.pyqtSignal()
@@ -32,7 +33,7 @@ class TaskWidget(QtGui.QWidget):
         self.setLayout(self.hbox)
 
     def onDeleteClicked(self):
-        # TODO remove task model
+        ServerCommunicator.deleteTask(self.taskModel)
         self.taskDeleteClicked.emit()
 
     def onEditClicked(self):
