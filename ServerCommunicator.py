@@ -26,3 +26,7 @@ def createNewTask(text):
     newTask = TaskModel(newId, text, False)
     _tasks.append(newTask)
     return newTask
+
+def deleteTask(task):
+    index = _tasks.index(task)
+    del _tasks[index]
