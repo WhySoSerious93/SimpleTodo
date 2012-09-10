@@ -37,17 +37,10 @@ class MainWindow(QtGui.QWidget):
         # Load tasks and create and add widgets.
         self.grid = QtGui.QGridLayout()
         self.taskVBox = QtGui.QVBoxLayout()
-        self.currentTaskIndex = 0
 
-        self.currentGridRow = 0
         tasks = ServerCommunicator.loadTasks()
         for task in tasks:
-            newTask = TaskWidget(task)
-
-            newTask.taskDeleteClicked.connect(self.onTaskWidgetDeleteClicked)
-
-            self.taskVBox.addWidget(newTask, self.currentTaskIndex)
-            self.currentTaskIndex += 1
+            self.addTask(task)
 
         # Buttons to edit your tasks.
         self.new = QtGui.QPushButton("New")
@@ -62,8 +55,9 @@ class MainWindow(QtGui.QWidget):
 
     def addTask(self, taskModel):
         """ Adds a task to the task list. """
-        task = TaskWidget(taskModel)
-        self.taskVBox.addWidget(task)
+        newTask = TaskWidget(taskModel)
+        newTask.taskDeleteClicked.connect(self.onTaskWidgetDeleteClicked)
+        self.taskVBox.addWidget(newTask)
 
 def main():
     app = QtGui.QApplication(sys.argv)
